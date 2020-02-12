@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
 </head>
+
 <body>
 
     <div id="app">
         <button v-on:click="changeVisibility">Mostrar/Ocultar</button>
-        <ul v-if="mostrar">
-            <tv-show v-for="(show,index) in tvshows" :key="index"
-            :name="show.name"
-            :seasons="show.seasons">
-            </tv-show>
-        </ul>
+       <tv-show-list v-if="mostrar"></tv-show-list>
         <div v-else>
             No hay datos
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
-    <script>//
-        Vue.component('tv-show',{
+    <script>
+        Vue.component('tv-show-list', {
+            data: function () {
+                return {
+                    tvshows: [{
+                            name: 'Game of Thrones',
+                            seasons: 8
+                        },
+                        {
+                            name: 'Breaking Bad',
+                            seasons: 5
+                        },
+                        {
+                            name: 'LOST',
+                            seasons: 6
+                        },
+                        {
+                            name: 'Battlestar Galactica',
+                            seasons: 4
+                        }
+                    ]
+                }
+
+            },
+            template: `
+                <ul>
+                <tv-show v-for="(show,index) in tvshows" :key="index" :name="show.name" :seasons="show.seasons">
+                 </tv-show>
+                </ul>
+            `
+        })
+
+        Vue.component('tv-show', {
             props: {
                 name: String,
                 seasons: Number
@@ -33,24 +61,19 @@
                 </li>
             `
         })
-        const app= new Vue({
+        const app = new Vue({
             el: '#app',
             data: {
                 mostrar: false,
-                tvshows:[
-                    {name: 'Game of Thrones',seasons: 8},
-                    {name: 'Breaking Bad',seasons: 5},
-                    {name: 'LOST',seasons: 6},
-                    {name: 'Battlestar Galactica',seasons: 4}
-                ]
+
             },
             methods: {
-                changeVisibility: function(){
-                    this.mostrar =  !this.mostrar
+                changeVisibility: function () {
+                    this.mostrar = !this.mostrar
                 }
             }
         })
-
     </script>
 </body>
+
 </html>
