@@ -7,16 +7,20 @@
 </head>
 <body>
     <div id="app"></div>
+
+    <template id="todo-add">
+        <div>
+            <input type='text' v-model="title"/>
+            <button @click="onClick">Añadir</button>
+        </div>
+    </template>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
     <script>
 
         Vue.component('todo-add',{
-            template:`
-                <div>
-                <input type='text' v-model="title"/>
-                <button @click="onClick">Añadir</button>
-                </div>
-            `,
+            
+            template:'#todo-add',
+
             data: function(){
                 return {
                     title:null
