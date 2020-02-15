@@ -8,6 +8,18 @@
     </ul>
 </template>
 
-<style scoped>
+<script>
+export default {
+    name: 'todo-list',
+    props: ['todos'],
+    methods:{
+      
+    }
+}
+</script>
 
+<style scoped>
+    ul{
+        list-style-type: none;
+    }
 </style>
